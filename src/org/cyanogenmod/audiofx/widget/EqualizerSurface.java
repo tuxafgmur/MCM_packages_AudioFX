@@ -94,7 +94,6 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
         mControlBar.setStrokeCap(Cap.SQUARE);
         mControlBar.setShadowLayer(2, 0, 0, getResources().getColor(R.color.black));
         mBarWidth = context.getResources().getDimensionPixelSize(R.dimen.eq_bar_width);
-//        mControlBar.setStrokeWidth(mBarWidth);
 
         mFrequencyResponseBg = new Paint();
         mFrequencyResponseBg.setStyle(Style.FILL);
@@ -148,23 +147,7 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
         }
         return levels;
     }
-    /*
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Bundle b = new Bundle();
-        b.putParcelable("super", super.onSaveInstanceState());
-        b.putFloatArray("levels", mLevels);
-        return b;
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Parcelable p) {
-        Bundle b = (Bundle) p;
-        super.onRestoreInstanceState(b.getBundle("super"));
-        mLevels = b.getFloatArray("levels");
-    }
-    */
-    
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -181,7 +164,8 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
      * @param alpha alpha value of color component
      */
     private static int gamma(float intensity, float alpha) {
-        /* intensity = (component * alpha)^2.2
+        /* 
+         * intensity = (component * alpha)^2.2
          * <=>
          * intensity^(1/2.2) / alpha = component
          */
@@ -196,7 +180,6 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
 
         final Resources res = getResources();
         mWidth = right - left;
-//        mHeight = bottom - top + (int) mWhite.getTextSize();
         mHeight = bottom - top;
 
         /**
@@ -228,8 +211,6 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
             0.95f, 1f
         };
 
-//        mControlBar.setShader(new LinearGradient(0, 0, 0, mHeight - mTextSize,
-//                barColors, barPositions, Shader.TileMode.CLAMP));
     }
 
     int mPasses = 140;
@@ -278,7 +259,6 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
             }
         });
         mAnimation.setDuration(1000);
-//        mAnimation.setStartDelay(100);
         mAnimation.setInterpolator(new DecelerateInterpolator());
         mAnimation.start();
 
@@ -287,10 +267,8 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
     @Override
     public void onAnimationUpdate(ValueAnimator animation) {
         final float fraction = (Float) animation.getAnimatedFraction();
-//        final float fraction = ((Float) (animation.getAnimatedValue())).floatValue();
 
         for (int i = 0; i < mNumBands; i++) {
-//            float delta = mTargetLevels[i] - mLevels[i];
             float newValue = mDeltas[i] * fraction;
             mLevels[i] = mStartLevels[i] + newValue;
         }
@@ -329,7 +307,6 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
 
         Path freqResponse = new Path();
         Complex[] zn = new Complex[biquads.length];
-//        final int passes = 140;
         for (int i = 0; i < mPasses+1; i ++) {
             double freq = reverseProjectX(i / (float)mPasses);
             double omega = freq / SAMPLING_RATE * Math.PI * 2;
@@ -364,28 +341,9 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
         freqResponseBg.close();
         canvas.drawPath(freqResponseBg, mFrequencyResponseBg);
 
-//        canvas.drawPath(freqResponse, mFrequencyResponseHighlight);
-//        canvas.drawPath(freqResponse, mFrequencyResponseHighlight2);
-
-        /* draw vertical lines */
-//        for (float freq = mMinFreq; freq < mMaxFreq;) {
-//            float x = projectX(freq) * mWidth;
-//            canvas.drawLine(x, 0, x, mHeight - 1, mGridLines);
-//            if (freq < 100) {
-//                freq += 10;
-//            } else if (freq < 1000) {
-//                freq += 100;
-//            } else if (freq < 10000) {
-//                freq += 1000;
-//            } else {
-//                freq += 10000;
-//            }
-//        }
-
         /* draw horizontal lines */
         for (float dB = mMinDB + 3; dB <= mMaxDB - 3; dB += 3) {
             float y = projectY(dB) * mHeight;
-//            canvas.drawLine(0, y, mWidth - 1, y, mGridLines);
             canvas.drawText(String.format("%+d", (int)dB), 1, (y - 1), mWhite);
         }
 
@@ -407,7 +365,7 @@ public class EqualizerSurface extends SurfaceView implements ValueAnimator.Anima
             }
 
             canvas.drawText(frequencyText, x, mWhite.getTextSize(), mControlBarText);
-            canvas.drawText(String.format("%+1.1f", mLevels[i]), x, y-1, mControlBarText);
+            canvas.drawText(String.format(" %+1.1f", mLevels[i]), x+30, y+11, mControlBarText);
         }
     }
 

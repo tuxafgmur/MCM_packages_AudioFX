@@ -317,7 +317,7 @@ public class ActivityMusic extends Activity {
 
         // setup equalizer
         mNumberEqualizerBands = Integer.parseInt(getSharedPreferences("global", 0)
-                .getString("equalizer.number_of_bands", "5"));
+                .getString("equalizer.number_of_bands", "6"));
         final int[] centerFreqs = getCenterFreqs();
         final int[] bandLevelRange = getBandLevelRange();
         float[] centerFreqsKHz = new float[centerFreqs.length];
@@ -368,8 +368,7 @@ public class ActivityMusic extends Activity {
         mVirtualizerKnob.setMax(OpenSLESConstants.VIRTUALIZER_MAX_STRENGTH -
                 OpenSLESConstants.VIRTUALIZER_MIN_STRENGTH);
         mVirtualizerKnob.setOnKnobChangeListener(new OnKnobChangeListener() {
-            // Update the parameters while Knob changes and set the
-            // effect parameter.
+            // Update the parameters while Knob changes and set the effect parameter.
             @Override
             public void onValueChanged(final Knob knob, final int value,
                                        final boolean fromUser) {
@@ -387,15 +386,12 @@ public class ActivityMusic extends Activity {
                     showHeadsetMsg();
                     return false;
                 }
-//                knob.setOn(getPrefs().getBoolean("audiofx.virtualizer.enable", true));
-//                knob.setOn(on);
                 return true;
             }
 
             @Override
             public void onAnimationFinished(boolean endValue) {
                 getPrefs().edit().putBoolean("audiofx.virtualizer.enable", endValue).apply();
-//                updateService();
                 mHandler.sendEmptyMessage(MSG_UPDATE_SERVICE);
             }
         });
@@ -423,14 +419,12 @@ public class ActivityMusic extends Activity {
                     showHeadsetMsg();
                     return false;
                 }
-//                knob.setOn(on);
                 return true;
             }
 
             @Override
             public void onAnimationFinished(boolean endValue) {
                 getPrefs().edit().putBoolean("audiofx.bass.enable", endValue).apply();
-//                updateService();
                 mHandler.sendEmptyMessage(MSG_UPDATE_SERVICE);
             }
         });

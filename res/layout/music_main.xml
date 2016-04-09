@@ -60,7 +60,7 @@
                 android:textColor="@color/eq_preset_label_text_color"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 android:background="@color/audiofx_background_color"
                 android:text="@string/eq_preset"
                 android:textAllCaps="true"/>
@@ -77,23 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 />
-
-        <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dip"-->
-        <!--android:layout_weight="23">-->
-
-        <!--<com.pheelicks.visualizer.VisualizerView-->
-        <!--android:id="@+id/visualizerView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--</com.pheelicks.visualizer.VisualizerView>-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_weight="1">-->
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -135,12 +118,6 @@
                     />
         </LinearLayout>
 
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="@color/disabled"/>-->
-
         <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -155,20 +132,16 @@
                 android:gravity="center"
                 android:background="@color/audiofx_background_color"
                 android:paddingTop="8dp"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 android:text="@string/reverb"
                 android:textAllCaps="true"/>
-
 
         <org.cyanogenmod.audiofx.widget.Gallery
                 android:id="@+id/reverb_gallery"
                 android:layout_width="match_parent"
-                android:layout_height="40dip"
+                android:layout_height="48dip"
                 android:background="@color/audiofx_background_color"
                 android:gravity="center_vertical"/>
-
-
-        <!--</FrameLayout>-->
 
     </org.cyanogenmod.audiofx.widget.InterceptableLinearLayout>
 </LinearLayout>
